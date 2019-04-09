@@ -2,41 +2,45 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<h6>@ViewBag.Msg</h6>
 <h2>Menu Principal</h2>
 
 
 <h3>Buscar Equipo</h3>
 
-@using (Html.BeginForm("Buscar", "Busqueda", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Busqueda", "Informacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="text" name="Buscado" />
+    <input type="text" name="Llave" />
     <input type="submit" value="Buscar" class="btn btn-primary" />
 }
+    <p>@ViewBag.Msg</p>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Mostrar estampillas faltantes", "Faltantes")
 </p>
-<table class="table">
-    <tr>
+<table class="table table-hover">
+    <tr class="table-light">
         <th>
             EQUIPO
         </th>
-        <th></th>
+        <th>
+            OPCIONES
+        </th>
     </tr>
 
     @foreach (var item in Unidad_5_Lab.Singleton.Data.Instancia.Equipos)
     {
-        <tr>
+        <tr class="table-dark">
             <td>
                 @Html.DisplayFor(modelItem => item)
             </td>
 
             <td>
-                @Html.ActionLink("Ver", "MostrarListas", new { Llave = item }) |
-                @Html.ActionLink("Detalles", "Details", new { Unidad_5_Lab.Singleton.Data.Instancia.Diccionario1 }) |
+                @Html.ActionLink("Ver Equipo", "MostrarListas", new { Llave = item }) 
             </td>
         </tr>
     }
 
 </table>
+
+

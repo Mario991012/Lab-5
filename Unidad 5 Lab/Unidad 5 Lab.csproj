@@ -132,6 +132,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Estampilla.cs" />
+    <Compile Include="Models\Diccionario2Info.cs" />
     <Compile Include="Models\Informacion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Singleton\Data.cs" />
@@ -141,6 +142,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrapCyborg.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -169,14 +171,12 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Informacion\Carga.cshtml" />
     <Content Include="Views\Informacion\Index.cshtml" />
-    <Content Include="Views\Informacion\Details.cshtml" />
-    <Content Include="Views\Informacion\MostrarListas.cshtml" />
     <Content Include="Views\Informacion\MostrarListaEscogida.cshtml" />
+    <Content Include="Views\Informacion\Busqueda.cshtml" />
+    <Content Include="Views\Informacion\Faltantes.cshtml" />
+    <Content Include="Views\Informacion\MostrarListas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -6,32 +6,24 @@
 
 <h2>@ViewBag.Msg</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
+
+<table class="table table-hover" >
+    <tr class="table-light">
         <th>
             @Html.DisplayNameFor(model => model.numero)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.cantidad)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
-        <td>
+        <td class="table-dark">
             @Html.DisplayFor(modelItem => item.numero)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.cantidad)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

@@ -23,7 +23,7 @@ namespace Unidad_5_Lab
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrapCyborg.css",
                       "~/Content/site.css"));
         }
     }

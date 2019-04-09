@@ -10,39 +10,79 @@ namespace Unidad_5_Lab.Controllers
 {
     public class InformacionController : Controller
     {
-        // GET: Informacion
         public ActionResult Index()
         {
             return View(Data.Instancia.Equipos);
         }
 
+        public ActionResult Faltantes()
+        {
+            Data.Instancia.Faltantes.Clear();
+            foreach(var item in Data.Instancia.Diccionario2)
+            {
+                if(item.Value == false)
+                {
+                    string[] llaveSeparada = item.Key.Split('|');
+                    string equipo = llaveSeparada[0];
+                    string estampilla = llaveSeparada[1];
+                    Diccionario2Info dato = new Diccionario2Info()
+                    {
+                        Equipo = equipo,
+                        NumeroEstampa = estampilla
+                    };
+                    Data.Instancia.Faltantes.Add(dato);
+                }
+            }
+            return View(Data.Instancia.Faltantes);
+        }
 
+        static int contador = 0;
         public ActionResult Carga()
         {
+            if(contador > 0)
+            {
+                ViewBag.Msg = "ERROR AL CARGAR EL ARCHIVO, INTENTE DE NUEVO";
+            }
+            contador++;
             return View();
         }
 
         [HttpPost]
-        public ActionResult Carga(HttpPostedFileBase file, FormCollection collection)
+        public ActionResult Carga(HttpPostedFileBase file)
         {
-            Upload(file);
-            return RedirectToAction("Upload");
-        }
-        public ActionResult Upload(HttpPostedFileBase file)
-        {
-
-            var model = Server.MapPath("~/Upload/") + file.FileName;
-            if (file.ContentLength > 0)
+            if(file != null)
             {
-                file.SaveAs(model);
-                Data.Instancia.LecturaCSV(model);
-                ViewBag.Msg = "";
+                Upload(file);
+                return RedirectToAction("Upload");
             }
             else
             {
-                ViewBag.Msg = "ERROR";
+                ViewBag.Msg = "ERROR AL CARGAR EL ARCHIVO, INTENTE DE NUEVO";
+                return View();
             }
-            return RedirectToAction("Index");
+            
+        }
+
+        public ActionResult Upload(HttpPostedFileBase file)
+        {
+            string model = "";
+            if (file != null && file.ContentLength > 0)
+            {
+                model = Server.MapPath("~/Upload/") + file.FileName;
+
+                file.SaveAs(model);
+                Data.Instancia.LecturaCSVAlbum(model);
+                ViewBag.Msg = "Carga de archivo correcta";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Msg = "ERROR AL CARGAR EL ARCHIVO, INTENTE DE NUEVO";
+                return RedirectToAction("Carga");
+            }
+            
+
+            
         }
 
 
@@ -52,15 +92,31 @@ namespace Unidad_5_Lab.Controllers
             return View(diccionario);
         }
 
-        // GET: Informacion/Create
+
         static string llave = "";
         public ActionResult MostrarListas(string Llave)
         {
             llave = Llave;
-            return View();
+            ViewBag.Nombre = Llave;
+            return View(Data.Instancia.Diccionario1[Llave].Todo);
         }
 
-        //[HttpPost]
+        public ActionResult Busqueda(string Llave)
+        {
+            if(Data.Instancia.Diccionario1.ContainsKey(Llave) == true)
+            {
+                llave = Llave;
+                ViewBag.Msg = "";
+                ViewBag.Nombre = Llave;
+                return View(Data.Instancia.Diccionario1[Llave].Todo);
+            }
+            else
+            {
+                ViewBag.Msg = "No se encontró el equipo buscado";
+                return View("Index");
+            }
+        }
+
         public ActionResult MostrarListaEscogida(int lista)
         {
             try
@@ -87,6 +143,13 @@ namespace Unidad_5_Lab.Controllers
                 return View();
             }
         }
+
+
+
+
+
+
+
 
         // GET: Informacion/Edit/5
         public ActionResult Edit(int id)
