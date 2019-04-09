@@ -4,17 +4,21 @@
     ViewBag.Title = "MostrarListas";
 }
 
-<h2>Listas de Estampillas de @ViewBag.Nombre</h2>
+<h2>UEFA Champions League: Listas de Estampillas de @ViewBag.Nombre</h2>
+
+<p>
+    @Html.ActionLink("Regresar a Menu Principal", "Index")
+</p>
 
 <table class="table table-hover">
-    <tr class="table-light">
+    <tr class="table">
         <th>Opciones</th>
         <th></th>
         <th></th>
     </tr>
 
 
-    <tr class="table-dark">
+    <tr class="table">
         <td>
             @Html.ActionLink("Faltantes", "MostrarListaEscogida", new { lista = 1 })
         </td>
@@ -29,7 +33,7 @@
 
 </table>
 <table class="table table-hover">
-    <tr class="table-light">
+    <tr class="table">
         <th>
             @Html.DisplayNameFor(model => model.numero)
         </th>
@@ -43,11 +47,11 @@
 
     @foreach (var item in Model)
     {
-        <tr class="table-dark">
+        <tr class="table">
             <td>
                 @Html.DisplayFor(modelItem => item.numero)
             </td>
-            <td>
+            <td class="table-dark">
                 @Html.DisplayFor(modelItem => item.cantidad)
             </td>
             <td>

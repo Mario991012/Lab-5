@@ -4,11 +4,14 @@
     ViewBag.Title = "MostrarListaEscogida";
 }
 
-<h2>@ViewBag.Msg</h2>
+<h2>UEFA Champions League:Lista de Estampillas de @ViewBag.Msg</h2>
 
+<p>
+    @Html.ActionLink("Regresar a Menu Principal", "Index")
+</p>
 
 <table class="table table-hover" >
-    <tr class="table-light">
+    <tr class="table">
         <th>
             @Html.DisplayNameFor(model => model.numero)
         </th>
@@ -18,11 +21,11 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td class="table-dark">
+    <tr class="table">
+        <td >
             @Html.DisplayFor(modelItem => item.numero)
         </td>
-        <td>
+        <td class="table-dark">
             @Html.DisplayFor(modelItem => item.cantidad)
         </td>
     </tr>
