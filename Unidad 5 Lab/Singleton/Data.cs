@@ -50,20 +50,24 @@ namespace Unidad_5_Lab.Singleton
                             
                             Estampilla estapa = new Estampilla();
                             Estampilla estapa2 = new Estampilla(); //Se crea para las estampas repetitivas
+                            Estampilla estapa3 = new Estampilla(); //Se crea para el view de cada equipo
                            
                             estapa.cantidad = int.Parse(infolinea[i]); //Cantidad de una estampa
                             estapa2.cantidad = int.Parse(infolinea[i]);
+                            estapa3.cantidad = int.Parse(infolinea[i]);
 
                             estapa.numero = int.Parse(infolinea[i - 11]); 
                             estapa2.numero = int.Parse(infolinea[i - 11]); //Numero de estampa
+                            estapa3.numero = int.Parse(infolinea[i - 11]);
 
                             string llaveD2 = $"{infolinea[0]}{"|"}{infolinea[i - 11]}"; //Llave para 2o diccionario
                             string llaveD1 = $"{infolinea[0]}"; //Llave para 1er diccionario
-                           
+                            
                             if (estapa.cantidad == 0)
                             {
                                 estapa.obtenida = false;
-                                Info.Todo.Add(estapa);
+                                estapa3.obtenida = false;
+
                                 Info.Faltantes.Add(estapa);
                                 Diccionario2.Add(llaveD2, estapa.obtenida);
                                 dato.Equipo = infolinea[0];
@@ -73,23 +77,23 @@ namespace Unidad_5_Lab.Singleton
                             else if (estapa.cantidad == 1)
                             {
                                 estapa.obtenida = true;
-                                Info.Todo.Add(estapa);
+                                estapa3.obtenida = true;
                                 Info.Coleccionadas.Add(estapa);
                                 Diccionario2.Add(llaveD2, estapa.obtenida);
                             }
                             else if (int.Parse(infolinea[i]) > 1)
                             {
                                 estapa.obtenida = true;
-                                Info.Todo.Add(estapa);
                                 estapa2.obtenida = true;
-
+                                estapa3.obtenida = true;
                                 estapa2.cantidad--;
-                                estapa.cantidad = 1;
+                                estapa.cantidad = 1; //ERROR
                                 Info.Coleccionadas.Add(estapa);                                
                                 Info.Disponibles.Add(estapa2);
                                 Diccionario2.Add(llaveD2, estapa.obtenida);
                             }
-                            
+                            Info.Todo.Add(estapa3);
+
                         }
                         Equipos.Add(infolinea[0]);
                         Diccionario1.Add(infolinea[0], Info);

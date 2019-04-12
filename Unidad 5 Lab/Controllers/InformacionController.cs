@@ -81,7 +81,7 @@ namespace Unidad_5_Lab.Controllers
             llave = Llave;
             ViewBag.Nombre = Llave;
             
-            return View(Data.Instancia.Diccionario1[llave].Todo); //MODIFICAR
+            return View(Data.Instancia.Diccionario1[Llave].Todo); //MODIFICAR
         }
 
         public ActionResult Busqueda(string Llave)
