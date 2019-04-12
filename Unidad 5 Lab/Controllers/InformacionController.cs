@@ -17,22 +17,6 @@ namespace Unidad_5_Lab.Controllers
 
         public ActionResult Faltantes()
         {
-            Data.Instancia.Faltantes.Clear();
-            foreach(var item in Data.Instancia.Diccionario2)
-            {
-                if(item.Value == false)
-                {
-                    string[] llaveSeparada = item.Key.Split('|');
-                    string equipo = llaveSeparada[0];
-                    string estampilla = llaveSeparada[1];
-                    Diccionario2Info dato = new Diccionario2Info()
-                    {
-                        Equipo = equipo,
-                        NumeroEstampa = estampilla
-                    };
-                    Data.Instancia.Faltantes.Add(dato);
-                }
-            }
             return View(Data.Instancia.Faltantes);
         }
 
@@ -80,9 +64,7 @@ namespace Unidad_5_Lab.Controllers
                 ViewBag.Msg = "ERROR AL CARGAR EL ARCHIVO, INTENTE DE NUEVO";
                 return RedirectToAction("Carga");
             }
-            
-
-            
+        
         }
 
 
@@ -98,17 +80,18 @@ namespace Unidad_5_Lab.Controllers
         {
             llave = Llave;
             ViewBag.Nombre = Llave;
-            return View(Data.Instancia.Diccionario1[Llave].Todo);
+            
+            return View(Data.Instancia.Diccionario1[llave].Todo); //MODIFICAR
         }
 
         public ActionResult Busqueda(string Llave)
         {
-            if(Data.Instancia.Diccionario1.ContainsKey(Llave) == true)
+            if(Data.Instancia.Diccionario2.ContainsKey(Llave) == true)
             {
                 llave = Llave;
                 ViewBag.Msg = "";
                 ViewBag.Nombre = Llave;
-                return View(Data.Instancia.Diccionario1[Llave].Todo);
+                return View(Data.Instancia.Diccionario2[Llave]);
             }
             else
             {
@@ -143,13 +126,6 @@ namespace Unidad_5_Lab.Controllers
                 return View();
             }
         }
-
-
-
-
-
-
-
 
         // GET: Informacion/Edit/5
         public ActionResult Edit(int id)

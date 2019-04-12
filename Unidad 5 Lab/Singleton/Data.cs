@@ -27,6 +27,8 @@ namespace Unidad_5_Lab.Singleton
         public List<string> Equipos = new List<string>();
         public List<Diccionario2Info> Faltantes = new List<Diccionario2Info>();
 
+       
+
         public void LecturaCSVAlbum(string path)
         {
             string[] lineas = File.ReadAllLines(path);
@@ -34,44 +36,71 @@ namespace Unidad_5_Lab.Singleton
 
             foreach (var linea in lineas)
             {
-                Informacion Info = new Informacion();
-                if (contador > 0)
+                try
                 {
-                    string[] infolinea = linea.Split(';');
-                    for (int i = 12; i < 23; i++)
+                    Informacion Info = new Informacion();
+                    if (contador > 0)
                     {
-                        Estampilla estapa = new Estampilla();
                         
-                        estapa.cantidad = int.Parse(infolinea[i]);
-                        estapa.numero = int.Parse(infolinea[i - 11]);
-                        string llave = $"{infolinea[0]}{"|"}{infolinea[i - 11]}";
+                        string[] infolinea = linea.Split(';');
+                        for (int i = 12; i < 23; i++)
+                        {
+                            Diccionario2Info dato = new Diccionario2Info();
 
-                        if (int.Parse(infolinea[i]) == 0)
-                        {
-                            estapa.obtenida = false;
-                            Info.Faltantes.Add(estapa);
-                            Diccionario2.Add(llave, false);
+                            
+                            Estampilla estapa = new Estampilla();
+                            Estampilla estapa2 = new Estampilla(); //Se crea para las estampas repetitivas
+                           
+                            estapa.cantidad = int.Parse(infolinea[i]); //Cantidad de una estampa
+                            estapa2.cantidad = int.Parse(infolinea[i]);
+
+                            estapa.numero = int.Parse(infolinea[i - 11]); 
+                            estapa2.numero = int.Parse(infolinea[i - 11]); //Numero de estampa
+
+                            string llaveD2 = $"{infolinea[0]}{"|"}{infolinea[i - 11]}"; //Llave para 2o diccionario
+                            string llaveD1 = $"{infolinea[0]}"; //Llave para 1er diccionario
+                           
+                            if (estapa.cantidad == 0)
+                            {
+                                estapa.obtenida = false;
+                                Info.Todo.Add(estapa);
+                                Info.Faltantes.Add(estapa);
+                                Diccionario2.Add(llaveD2, estapa.obtenida);
+                                dato.Equipo = infolinea[0];
+                                dato.NumeroEstampa = infolinea[i-11];
+                                Faltantes.Add(dato); //Para lista de faltantes
+                            }
+                            else if (estapa.cantidad == 1)
+                            {
+                                estapa.obtenida = true;
+                                Info.Todo.Add(estapa);
+                                Info.Coleccionadas.Add(estapa);
+                                Diccionario2.Add(llaveD2, estapa.obtenida);
+                            }
+                            else if (int.Parse(infolinea[i]) > 1)
+                            {
+                                estapa.obtenida = true;
+                                Info.Todo.Add(estapa);
+                                estapa2.obtenida = true;
+
+                                estapa2.cantidad--;
+                                estapa.cantidad = 1;
+                                Info.Coleccionadas.Add(estapa);                                
+                                Info.Disponibles.Add(estapa2);
+                                Diccionario2.Add(llaveD2, estapa.obtenida);
+                            }
+                            
                         }
-                        else if (int.Parse(infolinea[i]) > 1 && int.Parse(infolinea[i]) < 10)
-                        {
-                            estapa.obtenida = true;
-                            Info.Coleccionadas.Add(estapa);
-                            Info.Disponibles.Add(estapa);
-                            Diccionario2.Add(infolinea[0] + infolinea[i - 11], true);
-                        }
-                        else
-                        {
-                            estapa.obtenida = true;
-                            Info.Coleccionadas.Add(estapa);
-                            Diccionario2.Add(infolinea[0] + infolinea[i - 11], true);
-                        }
-                        Info.Todo.Add(estapa);
+                        Equipos.Add(infolinea[0]);
+                        Diccionario1.Add(infolinea[0], Info);
                     }
-                    Equipos.Add(infolinea[0]);
-                    Diccionario1.Add(infolinea[0], Info);
+                    else { contador++; }
+                }
+                catch
+                {
                     
                 }
-                else { contador++; }
+                
 
                 
             }

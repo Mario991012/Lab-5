@@ -20,15 +20,17 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr class="table">
-        <td>
-            @Html.DisplayFor(modelItem => item.NumeroEstampa)
-        </td>
-        <td class="table-dark">
-            @Html.DisplayFor(modelItem => item.Equipo)
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroEstampa)
+            </td>
+            <td class="table-dark">
+                @Html.DisplayFor(modelItem => item.Equipo)
+            </td>
+        </tr>
+    }
 
 </table>
+
