@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Carga de archivo";
+}
+
+<div class="jumbotron">
+    <h2 class="display-3">UEFA Champions League: Carga del archivo</h2>
+    <p class="lead">Carga la informacion del album que tienes y mira todo tu progreso</p>
+    <hr class="my-4">
+    <p class="lead">
+        @using (Html.BeginForm("Upload", "Informacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <p>Sube el archivo</p>
+            <input type="file"  name="file" />
+            <hr />
+            <input type="submit" value="Subir" class="btn btn-outline-success" />
+        }
+    </p>
+    <h6>@ViewBag.Msg</h6>
+</div>
+<audio 
+       id= "demo" src="~/Sources/audio.mp3">
+       <source src="~/Sources/audio.mp3" type="audio/mp3"/>
+</audio>
+<div>
+    <button onclick="document.getElementById('demo').play()">Reproducir Audio</button>
+    <button onclick="document.getElementById('demo').pause()">Pausar Audio</button>
+    <button onclick="document.getElementById('demo').volume+=0.1">Aumentar volumen</button>
+    <button onclick="document.getElementById('demo').volume-=0.1()">Disminuir volumen</button>
+
+</div>
+

@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>UEFA Champions League: Menu Principal</h2>
+
+<h4> Actualizacion de estampa (Digita NombreEquipo | NumeroEstampilla)</h4>
+<h6 style="color:#ff0000";>@ViewBag.Msg</h6>
+<ul>
+    @using (Html.BeginForm("Actualizacion", "Informacion", FormMethod.Post))
+    {
+    <p>Equipo</p>
+            <input type="text" name="Equipo" id="Equipo" />
+
+            <p>Numero de estampilla </p>
+            <input type="text" name="id" id="id" />
+
+        <input type="submit" value="Actualizar estampa" />
+    }
+</ul>
+<p>
+    @Html.ActionLink("Mostrar estampillas faltantes", "Faltantes")
+</p>
+<table class="table table-hover">
+    <tr class="table">
+        <th>
+            EQUIPO
+        </th>
+        <th>
+            OPCIONES
+        </th>
+    </tr>
+
+    @foreach (var item in Unidad_5_Lab.Singleton.Data.Instancia.Equipos)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item)
+            </td>
+
+            <td class="table-dark">
+                @Html.ActionLink("Ver Equipo", "MostrarListas", new { Llave = item }) 
+            </td>
+        </tr>
+    }
+
+</table>
+
+

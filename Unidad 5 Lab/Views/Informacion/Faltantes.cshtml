@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Unidad_5_Lab.Models.Diccionario2Info>
+
+@{
+    ViewBag.Title = "Faltantes";
+}
+
+<h3>UEFA Champions League: Estampillas Faltantes de Todo el Album</h3>
+
+<p>
+    @Html.ActionLink("Regresar a Menu Principal", "Index")
+</p>
+
+<table class="table table-hover">
+    <tr class="table">
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroEstampa)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Equipo)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item.NumeroEstampa)
+            </td>
+            <td class="table-dark">
+                @Html.DisplayFor(modelItem => item.Equipo)
+            </td>
+        </tr>
+    }
+
+</table>
+

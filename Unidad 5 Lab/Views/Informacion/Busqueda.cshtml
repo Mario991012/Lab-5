@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Unidad_5_Lab.Models.Estampilla>
+
+@{
+    ViewBag.Title = "MostrarListas";
+}
+
+<h2>UEFA Champions League: Listas de Estampillas de @ViewBag.Nombre</h2>
+
+<p>
+    @Html.ActionLink("Regresar a Menu Principal", "Index")
+</p>
+
+<table class="table table-hover">
+    <tr class="table">
+        <th>Opciones</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    <tr class="table">
+        <td>
+            @Html.ActionLink("Faltantes", "MostrarListaEscogida", new { lista = 1 })
+        </td>
+        <td>
+            @Html.ActionLink("Colecionadas", "MostrarListaEscogida", new { lista = 2 })
+        </td>
+        <td>
+            @Html.ActionLink("Disponibles", "MostrarListaEscogida", new { lista = 3 })
+        </td>
+    </tr>
+
+
+</table>
+<table class="table table-hover">
+    <tr class="table">
+        <th>
+            @Html.DisplayNameFor(model => model.numero)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.obtenida)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table">
+            <td>
+                @Html.DisplayFor(modelItem => item.numero)
+            </td>
+            <td class="table-dark">
+                @Html.DisplayFor(modelItem => item.cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.obtenida)
+            </td>
+        </tr>
+    }
+
+</table>
