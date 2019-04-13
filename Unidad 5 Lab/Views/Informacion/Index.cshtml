@@ -5,16 +5,15 @@
 <h6>@ViewBag.Msg</h6>
 <h2>UEFA Champions League: Menu Principal</h2>
 
+<h4> Actualizacion de estampa (Digita NombreEquipo+|+NumeroEstampilla)</h4>
+<ul>
+    @using (Html.BeginForm("Actualizacion", "Informacion", FormMethod.Post))
+    {
+        <input type="text" name="Llave" id="Llave" />
 
-<h3>Buscar Equipo</h3>
-
-@using (Html.BeginForm("Busqueda", "Informacion", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    <input type="text" name="Llave" />
-    <input type="submit" value="Buscar" class="btn btn-outline-success" />
-}
-    <p>@ViewBag.Msg</p>
-
+        <input type="submit" value="Actualizar estampa" />
+    }
+</ul>
 <p>
     @Html.ActionLink("Mostrar estampillas faltantes", "Faltantes")
 </p>

@@ -84,11 +84,12 @@ namespace Unidad_5_Lab.Controllers
             return View(Data.Instancia.Diccionario1[Llave].Todo); //MODIFICAR
         }
 
-        public ActionResult Busqueda(string Llave)
+        static string llave2 = "";
+        public ActionResult Actualizacion(string Llave)
         {
             if(Data.Instancia.Diccionario2.ContainsKey(Llave) == true)
             {
-                llave = Llave;
+                llave2 = Llave;
                 ViewBag.Msg = "";
                 ViewBag.Nombre = Llave;
                 return View(Data.Instancia.Diccionario2[Llave]);
@@ -98,6 +99,10 @@ namespace Unidad_5_Lab.Controllers
                 ViewBag.Msg = "No se encontró el equipo buscado";
                 return View("Index");
             }
+        }
+        public ActionResult Redirigir()
+        {
+            return RedirectToAction("Busqueda");           
         }
 
         public ActionResult MostrarListaEscogida(int lista)

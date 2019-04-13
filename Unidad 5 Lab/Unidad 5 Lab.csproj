@@ -179,6 +179,7 @@
     <Content Include="Views\Informacion\Busqueda.cshtml" />
     <Content Include="Views\Informacion\Faltantes.cshtml" />
     <Content Include="Views\Informacion\MostrarListas.cshtml" />
+    <Content Include="Views\Informacion\Actualizacion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
